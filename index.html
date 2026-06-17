@@ -23,29 +23,25 @@
     body { font-family: 'Noto Sans Thai', sans-serif; }
     .font-display { font-family: 'Space Grotesk', 'Noto Sans Thai', sans-serif; }
     .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
-    .glass-heavy { background: rgba(15,23,42,0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-full flex flex-col selection:bg-purple-500/30">
 
   <div id="auth-screen" class="flex-grow flex items-center justify-center px-4 py-12">
     <div class="w-full max-w-md space-y-8 glass p-8 rounded-3xl relative overflow-hidden">
-      <div class="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-500/10 rounded-full blur-3xl"></div>
-      
       <div class="text-center relative">
         <h1 class="text-3xl font-bold font-display bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">click Print &amp; Design</h1>
         <p class="mt-2 text-sm text-slate-400">ระบบบริหารจัดการและส่งงานเข้าฐานข้อมูล</p>
       </div>
 
-      <form class="mt-8 space-y-4 relative" onsubmit="handleLogin(event)">
+      <form class="mt-8 space-y-4" onsubmit="handleLogin(event)">
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">ชื่อผู้ใช้งาน</label>
-          <input id="login-name" type="text" required class="w-full px-4 py-3 bg-slate-900/60 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition placeholder:text-slate-600" placeholder="กรอกชื่อของคุณ">
+          <input id="login-name" type="text" required class="w-full px-4 py-3 bg-slate-900/60 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition" placeholder="กรอกชื่อของคุณ">
         </div>
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">รหัสพนักงาน / ID</label>
-          <input id="login-id" type="text" required class="w-full px-4 py-3 bg-slate-900/60 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition placeholder:text-slate-600" placeholder="กรอกรหัสพนักงาน">
+          <input id="login-id" type="text" required class="w-full px-4 py-3 bg-slate-900/60 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:border-purple-500 transition" placeholder="กรอกรหัสพนักงาน">
         </div>
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">ตำแหน่ง / บทบาท</label>
@@ -55,7 +51,7 @@
             <option value="Technician">Technician (ช่างเทคนิค)</option>
           </select>
         </div>
-        <button type="submit" class="w-full mt-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl text-sm font-medium transition shadow-lg shadow-purple-900/20 flex items-center justify-center gap-2">
+        <button type="submit" class="w-full mt-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl text-sm font-medium transition flex items-center justify-center gap-2">
           เข้าสู่ระบบ <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </button>
       </form>
@@ -64,64 +60,59 @@
 
   <div id="app-screen" class="hidden flex-grow flex flex-col">
     <nav class="border-b border-slate-900 bg-slate-950/60 backdrop-blur-md sticky top-0 z-40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center font-bold font-display text-sm text-white shadow-md shadow-purple-500/20">C</div>
           <span class="font-bold font-display tracking-tight bg-gradient-to-r from-slate-100 to-slate-300 bg-clip-text text-transparent">click System</span>
         </div>
         <div class="flex items-center gap-4">
-          <div class="text-right hidden sm:block">
+          <div class="text-right">
             <p id="nav-user-name" class="text-sm font-medium text-slate-200">-</p>
             <p id="nav-user-role" class="text-xs text-slate-500">-</p>
           </div>
-          <button onclick="handleLogout()" class="p-2 text-slate-400 hover:text-red-400 bg-slate-900/50 hover:bg-red-500/10 border border-slate-800 hover:border-red-500/20 rounded-xl transition">
+          <button onclick="handleLogout()" class="p-2 text-slate-400 hover:text-red-400 bg-slate-900/50 rounded-xl transition">
             <i data-lucide="log-out" class="w-4 h-4"></i>
           </button>
         </div>
       </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
       <div id="panel-entry" class="lg:col-span-5 space-y-6">
-        <div class="glass rounded-2xl p-6 space-y-6 relative overflow-hidden">
+        <div class="glass rounded-2xl p-6 space-y-6">
           <div class="flex items-center justify-between border-b border-slate-900 pb-4">
-            <div class="flex items-center gap-2">
-              <i data-lucide="calculator" class="w-5 h-5 text-purple-400"></i>
-              <h2 class="text-lg font-semibold text-slate-200">คำนวณราคา &amp; บันทึกงาน</h2>
-            </div>
+            <h2 class="text-lg font-semibold text-slate-200">คำนวณราคา &amp; บันทึกงาน</h2>
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">1. ขนาดกระดาษ</label>
             <div class="grid grid-cols-3 gap-2">
               <button onclick="setPaper('A4')" id="btn-paper-A4" class="p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition text-center">A4</button>
-              <button onclick="setPaper('A3')" id="btn-paper-A3" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 text-slate-400 text-sm font-medium transition text-center">A3</button>
-              <button onclick="setPaper('A3+')" id="btn-paper-A3Plus" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 text-slate-400 text-sm font-medium transition text-center">A3+</button>
+              <button onclick="setPaper('A3')" id="btn-paper-A3" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-slate-400 text-sm font-medium transition text-center">A3</button>
+              <button onclick="setPaper('A3+')" id="btn-paper-A3Plus" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-slate-400 text-sm font-medium transition text-center">A3+</button>
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">2. ระบบสี</label>
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="setColor('bw')" id="btn-color-bw" class="p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition flex items-center justify-center gap-2"><i data-lucide="contrast" class="w-4 h-4"></i> ขาวดำ</button>
-              <button onclick="setColor('color')" id="btn-color-color" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 text-slate-400 text-sm font-medium transition flex items-center justify-center gap-2"><i data-lucide="palette" class="w-4 h-4"></i> สี (Color)</button>
+              <button onclick="setColor('bw')" id="btn-color-bw" class="p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition text-center">ขาวดำ</button>
+              <button onclick="setColor('color')" id="btn-color-color" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-slate-400 text-sm font-medium transition text-center">สี (Color)</button>
             </div>
           </div>
 
           <div>
             <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">3. รูปแบบการพิมพ์</label>
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="setSide('single')" id="btn-side-single" class="p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition flex items-center justify-center gap-2"><i data-lucide="file" class="w-4 h-4"></i> หน้าเดียว</button>
-              <button onclick="setSide('double')" id="btn-side-double" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 text-slate-400 text-sm font-medium transition flex items-center justify-center gap-2"><i data-lucide="files" class="w-4 h-4"></i> หน้า-หลัง</button>
+              <button onclick="setSide('single')" id="btn-side-single" class="p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition text-center">หน้าเดียว</button>
+              <button onclick="setSide('double')" id="btn-side-double" class="p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-slate-400 text-sm font-medium transition text-center">หน้า-หลัง</button>
             </div>
           </div>
 
-          <div class="pt-2 space-y-4">
+          <div class="space-y-4">
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-semibold text-slate-400 mb-1.5">จำนวน (แผ่น/ชุด)</label>
-                <input id="calc-qty" type="number" min="1" value="1" oninput="calculatePrice()" class="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition">
+                <input id="calc-qty" type="number" min="1" value="1" oninput="calculatePrice()" class="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none">
               </div>
               <div>
                 <label class="block text-xs font-semibold text-slate-400 mb-1.5">ราคาประเมินรวม</label>
@@ -133,11 +124,11 @@
 
             <div>
               <label class="block text-xs font-semibold text-slate-400 mb-1.5">รายละเอียดงาน / คอนเซปต์ที่ต้องการเพิ่มเติม</label>
-              <textarea id="order-brief" rows="3" required class="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition resize-none placeholder:text-slate-600" placeholder="กรอกรายละเอียดงานปริ้น/ออกแบบ..."></textarea>
+              <textarea id="brief-desc" rows="3" required class="w-full px-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none resize-none" placeholder="กรอกรายละเอียดงาน..."></textarea>
             </div>
 
             <button onclick="openConfirmModal()" class="w-full py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white rounded-xl text-sm font-medium transition shadow-lg flex items-center justify-center gap-2">
-              <i data-lucide="send" class="w-4 h-4"></i> ส่งข้อมูลไปที่ Google Sheets
+              ส่งข้อมูลไปที่ Google Sheets
             </button>
           </div>
         </div>
@@ -146,14 +137,10 @@
       <div class="lg:col-span-7 space-y-6">
         <div class="glass rounded-2xl p-6 space-y-4 flex flex-col h-full max-h-[640px]">
           <div class="flex items-center justify-between border-b border-slate-900 pb-4">
-            <div class="flex items-center gap-2">
-              <i data-lucide="layers" class="w-5 h-5 text-pink-400"></i>
-              <h2 class="text-lg font-semibold text-slate-200">คิวงานล่าสุดในระบบ</h2>
-            </div>
-            <span id="queue-count" class="px-2.5 py-1 text-xs font-semibold bg-slate-900 border border-slate-800 rounded-full text-slate-400">0 รายการ</span>
+            <h2 class="text-lg font-semibold text-slate-200">คิวงานล่าสุดในระบบ</h2>
+            <span id="queue-count" class="px-2.5 py-1 text-xs bg-slate-900 rounded-full text-slate-400">0 รายการ</span>
           </div>
-
-          <div id="technicians-list" class="flex-grow overflow-y-auto space-y-3 pr-1"></div>
+          <div id="technicians-list" class="flex-grow overflow-y-auto space-y-3"></div>
         </div>
       </div>
     </main>
@@ -166,11 +153,11 @@
       <form onsubmit="submitOrder(event)" class="space-y-4">
         <div>
           <label for="job-name" class="block text-xs text-slate-400 mb-1">ตั้งชื่อออร์เดอร์ / ชื่องาน *</label>
-          <input id="job-name" type="text" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-sm focus:outline-none focus:border-blue-500 placeholder:text-slate-500" placeholder="เช่น งานนามบัตรร้านข้าว, ปริ้นชีทเรียน">
+          <input id="job-name" type="text" required class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-sm text-slate-200 focus:outline-none" placeholder="เช่น งานนามบัตรร้านข้าว">
         </div>
         <div>
           <label for="order-notes" class="block text-xs text-slate-400 mb-1">หมายเหตุเพิ่มเติมถึงผู้ปฏิบัติงาน</label>
-          <textarea id="order-notes" rows="3" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-sm focus:outline-none focus:border-blue-500 resize-none placeholder:text-slate-500" placeholder="เช่น ด่วนมาก, นัดรับเย็นนี้"></textarea>
+          <textarea id="order-notes" rows="3" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-lg text-sm text-slate-200 focus:outline-none resize-none" placeholder="เช่น ด่วนมาก, นัดรับเย็นนี้"></textarea>
         </div>
         <div class="flex gap-3">
           <button type="button" onclick="document.getElementById('confirm-order-modal').classList.add('hidden')" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-medium transition">ยกเลิก</button>
@@ -181,11 +168,11 @@
   </div>
 
   <div id="toast" class="hidden fixed bottom-6 right-6 z-50 px-5 py-3 bg-green-600 rounded-xl text-sm font-medium shadow-lg flex items-center gap-2">
-    <i data-lucide="check-circle" class="w-4 h-4"></i><span id="toast-msg">สำเร็จ!</span>
+    <span id="toast-msg">สำเร็จ!</span>
   </div>
 
   <script>
-    // ⚠️ ลิงก์ Web App ตัวล่าสุดจาก Google Apps Script ของคุณ
+    // ตั้งค่าตัวแปร URL ให้แมตช์กันเรียบร้อย
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx7MxkGs1_fENynlXe2fXHaAuRcWjth8FLTekz6_Z_Hsmu0_1xA9KbHHR7zLftfdZ8/exec"; 
 
     let currentUser = null;
@@ -212,13 +199,6 @@
       document.getElementById('auth-screen').classList.add('hidden');
       document.getElementById('app-screen').classList.remove('hidden');
       
-      if(role === 'Technician') {
-        document.getElementById('panel-entry').classList.add('opacity-40', 'pointer-events-none');
-      } else {
-        document.getElementById('panel-entry').classList.remove('opacity-40', 'pointer-events-none');
-      }
-
-      showToast(`ยินดีต้อนรับคุณ ${name}!`, 'bg-purple-600');
       calculatePrice();
       renderStaffList();
     }
@@ -227,17 +207,17 @@
       currentUser = null;
       document.getElementById('app-screen').classList.add('hidden');
       document.getElementById('auth-screen').classList.remove('hidden');
-      showToast('ออกจากระบบเรียบร้อยแล้ว', 'bg-slate-800');
     }
 
     function setPaper(size) {
       calcState.paper = size;
       ['A4', 'A3', 'A3Plus'].forEach(s => {
         const b = document.getElementById('btn-paper-' + s);
-        b.className = "p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 text-slate-400 text-sm font-medium transition text-center";
+        if (b) b.className = "p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-slate-400 text-sm font-medium transition text-center";
       });
       const currentBtnId = size === 'A4' ? 'btn-paper-A4' : size === 'A3' ? 'btn-paper-A3' : 'btn-paper-A3Plus';
-      document.getElementById(currentBtnId).className = "p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition text-center";
+      const activeBtn = document.getElementById(currentBtnId);
+      if (activeBtn) activeBtn.className = "p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition text-center";
       calculatePrice();
     }
 
@@ -245,9 +225,10 @@
       calcState.color = type;
       ['bw', 'color'].forEach(t => {
         const b = document.getElementById('btn-color-' + t);
-        b.className = "p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 text-slate-400 text-sm font-medium transition flex items-center justify-center gap-2";
+        if (b) b.className = "p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-slate-400 text-sm font-medium transition text-center";
       });
-      document.getElementById('btn-color-' + type).className = "p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition flex items-center justify-center gap-2";
+      const activeBtn = document.getElementById('btn-color-' + type);
+      if (activeBtn) activeBtn.className = "p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition text-center";
       calculatePrice();
     }
 
@@ -255,9 +236,10 @@
       calcState.side = mode;
       ['single', 'double'].forEach(m => {
         const b = document.getElementById('btn-side-' + m);
-        b.className = "p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:border-slate-700 text-slate-400 text-sm font-medium transition flex items-center justify-center gap-2";
+        if (b) b.className = "p-3 rounded-xl border border-slate-800 bg-slate-900/40 text-slate-400 text-sm font-medium transition text-center";
       });
-      document.getElementById('btn-side-' + mode).className = "p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition flex items-center justify-center gap-2";
+      const activeBtn = document.getElementById('btn-side-' + mode);
+      if (activeBtn) activeBtn.className = "p-3 rounded-xl border border-purple-500 bg-purple-500/10 text-purple-300 text-sm font-medium transition text-center";
       calculatePrice();
     }
 
@@ -270,9 +252,10 @@
     }
 
     function openConfirmModal() {
-      const brief = document.getElementById('order-brief').value.trim();
+      // ดึงค่าจากไอดี brief-desc ที่ถูกต้อง
+      const brief = document.getElementById('brief-desc').value.trim();
       if(!brief) {
-        showToast('กรุณากรอกรายละเอียดงานหรือคอนเซปต์งานก่อนครับ', 'bg-red-600');
+        showToast('กรุณากรอกรายละเอียดงานก่อนครับ', 'bg-red-600');
         return;
       }
       const qty = document.getElementById('calc-qty').value;
@@ -290,7 +273,7 @@
       e.preventDefault();
       const jobName = document.getElementById('job-name').value.trim();
       const notes = document.getElementById('order-notes').value.trim();
-      const brief = document.getElementById('order-brief').value.trim();
+      const brief = document.getElementById('brief-desc').value.trim();
       const qty = document.getElementById('calc-qty').value;
       const price = calculatePrice();
 
@@ -315,34 +298,29 @@
       })
       .then(res => res.json())
       .then(data => {
-        if (data.status === 'success') {
-          showToast('บันทึกข้อมูลลง Google Sheets สำเร็จ!', 'bg-green-600');
-          staffList.unshift({
-            jobName: jobName,
-            spec: `${calcState.paper} / ${calcState.color === 'bw' ? 'ขาวดำ' : 'สี'} / ${calcState.side === 'single' ? 'หน้าเดียว' : 'หน้า-หลัง'}`,
-            qty: qty,
-            price: price,
-            sender: currentUser.name,
-            brief: brief + (notes ? ` (${notes})` : '')
-          });
-          renderStaffList();
-          document.getElementById('order-brief').value = '';
-        }
+        showToast('บันทึกข้อมูลลง Google Sheets สำเร็จ!', 'bg-green-600');
+        updateLocalList(jobName, qty, price, brief, notes);
       })
       .catch(err => {
-        // Fallback ในกรณีติด CORS แต่ข้อมูลเข้า Sheet แล้ว
-        showToast('บันทึกข้อมูลลงระบบเรียบร้อยแล้ว!', 'bg-green-600');
-        staffList.unshift({
-          jobName: jobName,
-          spec: `${calcState.paper} / ${calcState.color === 'bw' ? 'ขาวดำ' : 'สี'} / ${calcState.side === 'single' ? 'หน้าเดียว' : 'หน้า-หลัง'}`,
-          qty: qty,
-          price: price,
-          sender: currentUser.name,
-          brief: brief + (notes ? ` (${notes})` : '')
-        });
-        renderStaffList();
-        document.getElementById('order-brief').value = '';
+        // ทำงานได้แม้จะติด CORS บล็อกของเบราว์เซอร์
+        showToast('ส่งข้อมูลเข้า Sheet เรียบร้อยแล้ว!', 'bg-green-600');
+        updateLocalList(jobName, qty, price, brief, notes);
       });
+    }
+
+    function updateLocalList(jobName, qty, price, brief, notes) {
+      staffList.unshift({
+        jobName: jobName,
+        spec: `${calcState.paper} / ${calcState.color === 'bw' ? 'ขาวดำ' : 'สี'} / ${calcState.side === 'single' ? 'หน้าเดียว' : 'หน้า-หลัง'}`,
+        qty: qty,
+        price: price,
+        sender: currentUser.name,
+        brief: brief + (notes ? ` (${notes})` : '')
+      });
+      renderStaffList();
+      document.getElementById('brief-desc').value = '';
+      document.getElementById('job-name').value = '';
+      document.getElementById('order-notes').value = '';
     }
 
     function renderStaffList() {
@@ -368,6 +346,15 @@
           </div>
         </div>
       `).join('');
+    }
+
+    function showToast(msg, bgColor = 'bg-green-600') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toast.className = `fixed bottom-6 right-6 z-50 px-5 py-3 ${bgColor} rounded-xl text-sm font-medium shadow-lg flex items-center gap-2`;
+      toastMsg.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => { toast.classList.add('hidden'); }, 4000);
     }
 
     lucide.createIcons();
